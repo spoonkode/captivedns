@@ -19,6 +19,19 @@ $ dig +short A facebook.com @10.0.0.5
 ```
 In the case above, the captivedns server was configured to respond to all A record lookup requests for facebook.com with IP addresses 10.0.0.1 and 10.0.0.2.
 
+## Installing
+
+The code has not been properly packaged yet. You can install it like this:
+
+```
+$ cd ~
+$ git clone https://github.com/spoonkode/captivedns.git
+$ cd captivedns
+$ virtualenv virtualenv
+$ source virtualenv/bin/activate
+(virtualenv)$ pip install -r requirements.txt
+```
+
 ## Running
 
 Currently, the server has *not* been packaged and there are no start-up scripts available (it's on my TODO list), so you'll have to do it the old-fashioned way using _nohup_. Example;
@@ -59,9 +72,13 @@ The configuration for captivedns is held in a JSON-encoded file. Example:
 }
 ```
 
+#### Configuration Options
 * _bind-ip_ - The IP address to bind to.
+* _tcp-port_ - The TCP port number to bind to.
+* _udp-port_ - The UDP port number to bind to.
 * _ttl_ - DNS record time-to-live. Read https://en.wikipedia.org/wiki/Time_to_live#DNS_records
 * _resolve-conf_ - Path to file containing list of name servers to use for DNS lookups.
+* _dns-servers_ - List of DNS servers to use for DNS queries (as an alternative to the list in resolv-conf)
 * _default-a-records_ - List of IP addresses to respond with in place of actual A records.
 * _default-ptr-records_ - List of names to respond with in place of actual PTR records.
 * _log-file_ - The log file to write to.
