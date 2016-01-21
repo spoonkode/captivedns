@@ -1,0 +1,35 @@
+{
+  "bind-ip": "10.172.254.182",
+  "ttl": 30,
+  "resolv-conf": "/etc/resolv.conf",
+
+  "default-a-records": ["10.0.0.1", "10.0.0.2"],
+  "default-ptr-records": ["portal.local."],
+
+  "log-level": "debug",
+  "log-file": "./captive-dns-server.log",
+
+  "auth-plugin": {
+    "type": "ACLAuth",
+    "action": "DENY",
+    "acls":
+            [
+              "(?:.*\\.)?facebook.com",
+              "pornhub",
+              "4chan",
+              "1.0.0.10.in-addr.arpa"
+            ]
+  },
+
+  "sample-auth-plugin": {
+    "type": "NeverRedirect"
+  },
+
+  "sample-auth-plugin": {
+    "type": "SimpleWebAuth",
+    "url": "http://localhost/check_ip.php",
+    "method": "GET",
+    "expect-code": 200,
+    "expect-string": "OK"
+  }
+}
